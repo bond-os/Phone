@@ -84,6 +84,8 @@ class SettingsActivity : SimpleActivity() {
         setupDisableProximitySensor()
         setupDisableSwipeToAnswer()
         setupAlwaysShowFullscreen()
+        setupCallBackUsingEntryLineForMissed()
+        setupAlwaysCallBackUsingEntryLine()
         setupCallsExport()
         setupCallsImport()
         updateTextColors(binding.settingsHolder)
@@ -319,6 +321,26 @@ class SettingsActivity : SimpleActivity() {
             settingsAlwaysShowFullscreenHolder.setOnClickListener {
                 settingsAlwaysShowFullscreen.toggle()
                 config.alwaysShowFullscreen = settingsAlwaysShowFullscreen.isChecked
+            }
+        }
+    }
+
+    private fun setupCallBackUsingEntryLineForMissed() {
+        binding.apply {
+            settingsCallBackUsingEntryLineForMissed.isChecked = config.callBackUsingEntryLineForMissed
+            settingsCallBackUsingEntryLineForMissedHolder.setOnClickListener {
+                settingsCallBackUsingEntryLineForMissed.toggle()
+                config.callBackUsingEntryLineForMissed = settingsCallBackUsingEntryLineForMissed.isChecked
+            }
+        }
+    }
+
+    private fun setupAlwaysCallBackUsingEntryLine() {
+        binding.apply {
+            settingsAlwaysCallBackUsingEntryLine.isChecked = config.alwaysCallBackUsingEntryLine
+            settingsAlwaysCallBackUsingEntryLineHolder.setOnClickListener {
+                settingsAlwaysCallBackUsingEntryLine.toggle()
+                config.alwaysCallBackUsingEntryLine = settingsAlwaysCallBackUsingEntryLine.isChecked
             }
         }
     }

@@ -89,4 +89,12 @@ class Config(context: Context) : BaseConfig(context) {
     var alwaysShowFullscreen: Boolean
         get() = prefs.getBoolean(ALWAYS_SHOW_FULLSCREEN, false)
         set(alwaysShowFullscreen) = prefs.edit().putBoolean(ALWAYS_SHOW_FULLSCREEN, alwaysShowFullscreen).apply()
+
+    var callBackUsingEntryLineForMissed: Boolean
+        get() = prefs.getBoolean(CALL_BACK_USING_ENTRY_LINE_FOR_MISSED, false)
+        set(callBackUsingEntryLineForMissed) = prefs.edit().putBoolean(CALL_BACK_USING_ENTRY_LINE_FOR_MISSED, callBackUsingEntryLineForMissed).apply()
+
+    var alwaysCallBackUsingEntryLine: Boolean
+        get() = prefs.getBoolean(ALWAYS_CALL_BACK_USING_ENTRY_LINE, false)
+        set(alwaysCallBackUsingEntryLine) = prefs.edit().putBoolean(ALWAYS_CALL_BACK_USING_ENTRY_LINE, alwaysCallBackUsingEntryLine).apply()
 }

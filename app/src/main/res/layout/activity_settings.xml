@@ -334,6 +334,36 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/settings_call_back_using_entry_line_for_missed_holder"
+                style="@style/SettingsHolderCheckboxStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <org.fossify.commons.views.MyAppCompatCheckbox
+                    android:id="@+id/settings_call_back_using_entry_line_for_missed"
+                    style="@style/SettingsCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/call_back_using_entry_line_for_missed" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_always_call_back_using_entry_line_holder"
+                style="@style/SettingsHolderCheckboxStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <org.fossify.commons.views.MyAppCompatCheckbox
+                    android:id="@+id/settings_always_call_back_using_entry_line"
+                    style="@style/SettingsCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_always_call_back_using_entry_line" />
+
+            </RelativeLayout>
+
             <include
                 android:id="@+id/settings_dialpad_divider"
                 layout="@layout/divider" />

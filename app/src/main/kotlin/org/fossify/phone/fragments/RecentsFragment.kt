@@ -1,6 +1,7 @@
 package org.fossify.phone.fragments
 
 import android.content.Context
+import android.provider.CallLog
 import android.util.AttributeSet
 import org.fossify.commons.dialogs.CallConfirmationDialog
 import org.fossify.commons.extensions.*
@@ -15,6 +16,7 @@ import org.fossify.phone.activities.SimpleActivity
 import org.fossify.phone.adapters.RecentCallsAdapter
 import org.fossify.phone.databinding.FragmentRecentsBinding
 import org.fossify.phone.extensions.config
+import org.fossify.phone.extensions.getAvailableSIMCardLabels
 import org.fossify.phone.helpers.MIN_RECENTS_THRESHOLD
 import org.fossify.phone.helpers.RecentsHelper
 import org.fossify.phone.interfaces.RefreshItemsListener
@@ -105,10 +107,22 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
                         val recentCall = it as RecentCall
                         if (context.config.showCallConfirmation) {
                             CallConfirmationDialog(activity as SimpleActivity, recentCall.name) {
-                                activity?.launchCallIntent(recentCall.phoneNumber)
+                                if (context.config.alwaysCallBackUsingEntryLine ||
+                                    (recentCall.type == CallLog.Calls.MISSED_TYPE && context.config.callBackUsingEntryLineForMissed)) {
+                                    val handle = context.getAvailableSIMCardLabels().sortedBy { it.id }.getOrNull(recentCall.simID - 1)?.handle
+                                    activity?.launchCallIntent(recentCall.phoneNumber, handle)
+                                } else {
+                                    activity?.launchCallIntent(recentCall.phoneNumber)
+                                }
                             }
                         } else {
-                            activity?.launchCallIntent(recentCall.phoneNumber)
+                            if (context.config.alwaysCallBackUsingEntryLine ||
+                                (recentCall.type == CallLog.Calls.MISSED_TYPE && context.config.callBackUsingEntryLineForMissed)) {
+                                val handle = context.getAvailableSIMCardLabels().sortedBy { it.id }.getOrNull(recentCall.simID - 1)?.handle
+                                activity?.launchCallIntent(recentCall.phoneNumber, handle)
+                            } else {
+                                activity?.launchCallIntent(recentCall.phoneNumber)
+                            }
                         }
                     }
                 )
